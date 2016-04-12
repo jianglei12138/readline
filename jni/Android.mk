@@ -4,12 +4,18 @@ LOCAL_PATH:= $(call my-dir)
 #################termcap#####################
 include $(CLEAR_VARS)
 
+LOCAL_C_INCLUDES += \
+    $(LOCAL_PATH)/readline
+    
+LOCAL_CFLAGS := \
+	-DHAVE_CONFIG_H \
+	-ansi -Wall 
 LOCAL_SRC_FILES:= \
 	termcap/termcap.c \
 	termcap/tparam.c \
 	termcap/version.c
 LOCAL_MODULE := termcap
-include $(BUILD_STATIC_LIBRARY)
+include $(BUILD_SHARED_LIBRARY)
 
 
 #################history#####################
@@ -45,7 +51,7 @@ LOCAL_C_INCLUDES += \
 LOCAL_CFLAGS := \
 	-DHAVE_CONFIG_H \
 	-ansi -Wall 
-LOCAL_STATIC_LIBRARIES := termcap
+LOCAL_SHARED_LIBRARIES := termcap
 LOCAL_MODULE := readline
 
 include $(BUILD_SHARED_LIBRARY)
